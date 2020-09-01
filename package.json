@@ -1,0 +1,25 @@
+{
+  "name": "paralon",
+  "version": "1.0.0",
+  "description": "Transport independent client and server side services implementation framework",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuestionAndAnswer/paralon.git"
+  },
+  "keywords": [
+    "paralon",
+    "service",
+    "proto",
+    "protobuf"
+  ],
+  "author": "Artsiom Miksiuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/QuestionAndAnswer/paralon/issues"
+  },
+  "homepage": "https://github.com/QuestionAndAnswer/paralon#readme"
+}
