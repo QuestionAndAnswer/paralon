@@ -1,0 +1,32 @@
+{
+  "name": "@paralon/cli",
+  "version": "1.0.0",
+  "description": "Generation tools for paralon framework",
+  "keywords": [
+    "paralon"
+  ],
+  "author": "Artsiom Miksiuk <forbiddentool@gmail.com>",
+  "homepage": "https://github.com/QuestionAndAnswer/paralon/tree/master/packages/cli#readme",
+  "license": "MIT",
+  "main": "lib/cli.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuestionAndAnswer/paralon.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/QuestionAndAnswer/paralon/issues"
+  }
+}

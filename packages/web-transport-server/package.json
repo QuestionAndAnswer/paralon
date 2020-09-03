@@ -1,0 +1,32 @@
+{
+  "name": "@paralon/web-transport-server",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "keywords": [
+    "paralon"
+  ],
+  "author": "Artsiom Miksiuk <forbiddentool@gmail.com>",
+  "homepage": "https://github.com/QuestionAndAnswer/paralon/tree/master/packages/web-transport-server#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuestionAndAnswer/paralon.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/QuestionAndAnswer/paralon/issues"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "name": "@paralon/core",
+  "version": "1.0.0",
+  "description": "Paralon framework core",
+  "keywords": [
+    "paralon",
+    "core",
+    "proto",
+    "microservices",
+    "web"
+  ],
+  "author": "Artsiom Miksiuk <forbiddentool@gmail.com>",
+  "homepage": "https://github.com/QuestionAndAnswer/paralon/tree/master/packages/core#readme",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "files": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuestionAndAnswer/paralon.git"
+  },
+  "scripts": {
+    "prepare": "tsc",
+    "prepublishOnly": "tsc && rm -rf lib/*.map",
+    "build": "tsc"
+  },
+  "bugs": {
+    "url": "https://github.com/QuestionAndAnswer/paralon/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^14.6.2",
+    "@types/protobufjs": "^6.0.0",
+    "protobufjs": "^6.10.1",
+    "typescript": "^4.0.2"
+  }
+}

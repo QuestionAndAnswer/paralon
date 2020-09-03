@@ -1,0 +1,29 @@
+import "google/protobuf/empty.proto";
+
+package skills;
+syntax = "proto3";
+
+service SKillsService {
+    rpc Get (GetSkillsRequest) returns (GetSkillsResponse) {}
+    rpc ClientStreamGet (stream DeleteSkillsRequest) returns (GetSkillsResponse) {}
+    rpc ServerStreamGet (DeleteSkillsRequest) returns (stream GetSkillsResponse) {}
+    rpc BiStreamGet (stream DeleteSkillsRequest) returns (stream GetSkillsResponse) {}
+
+    rpc GetEmpty (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc ClientStreamGetEmpty (stream google.protobuf.Empty) returns (google.protobuf.Empty) {}
+    rpc ServerStreamGetEmpty (google.protobuf.Empty) returns (stream google.protobuf.Empty) {}
+    rpc BiStreamGetEmpty (stream google.protobuf.Empty) returns (stream google.protobuf.Empty) {}
+}
+
+message Skill {
+    string id = 1;
+    string path = 2;
+}
+
+message GetSkillsRequest {
+    repeated string ids = 1;
+}
+
+message GetSkillsResponse {
+    repeated Skill skills = 1;
+}
