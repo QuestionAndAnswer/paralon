@@ -1,13 +1,13 @@
 import "google/protobuf/empty.proto";
 
-package skills;
+package ns1.testPkg;
 syntax = "proto3";
 
-service SKillsService {
-    rpc Get (GetSkillsRequest) returns (GetSkillsResponse) {}
-    rpc ClientStreamGet (stream DeleteSkillsRequest) returns (GetSkillsResponse) {}
-    rpc ServerStreamGet (DeleteSkillsRequest) returns (stream GetSkillsResponse) {}
-    rpc BiStreamGet (stream DeleteSkillsRequest) returns (stream GetSkillsResponse) {}
+service TestService {
+    rpc Get (GetRequest) returns (GetResponse) {}
+    rpc ClientStreamGet (stream GetRequest) returns (GetResponse) {}
+    rpc ServerStreamGet (GetRequest) returns (stream GetResponse) {}
+    rpc BiStreamGet (stream GetRequest) returns (stream GetResponse) {}
 
     rpc GetEmpty (google.protobuf.Empty) returns (google.protobuf.Empty) {}
     rpc ClientStreamGetEmpty (stream google.protobuf.Empty) returns (google.protobuf.Empty) {}
@@ -20,10 +20,10 @@ message Skill {
     string path = 2;
 }
 
-message GetSkillsRequest {
+message GetRequest {
     repeated string ids = 1;
 }
 
-message GetSkillsResponse {
+message GetResponse {
     repeated Skill skills = 1;
 }

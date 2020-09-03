@@ -13,6 +13,7 @@ export interface Encodable<T> {
 export type MethodMessage<T = unknown> = Encodable<T> & Decodable<T>;
 
 export interface MethodMeta<RQ = unknown, RS = unknown> {
+    name: string;
     reqType: MethodMessage<RQ>;
     resType: MethodMessage<RS>;
 }
