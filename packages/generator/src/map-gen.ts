@@ -53,7 +53,7 @@ function createMethodMapLineTSDeclaration(method: Method) {
                     ts.factory.createIdentifier(resolveTypeIdentifier(method, method.responseType))
                 )
             ],
-            true
+            false
         )
     );
 }

@@ -1,12 +1,16 @@
 import * as ts from "typescript";
-import { posix, relative, dirname, basename } from "path";
+import { posix, relative } from "path";
 
 export function createImports(
-    basePath: string,
-    protobufGeneratedDTSFilePath: string
+    outDir: string,
+    pbjsPath: string
 ) {
+    const relativePbjsPath = posix.normalize(
+        relative(outDir, pbjsPath)
+    );
+
     return [
-        ts.createImportDeclaration(
+        ts.factory.createImportDeclaration(
             undefined,
             undefined,
             ts.factory.createImportClause(
@@ -14,11 +18,11 @@ export function createImports(
                 undefined,
                 ts.factory.createNamespaceImport(ts.factory.createIdentifier("contract"))
             ),
-            ts.createStringLiteral(
-                `./${posix.join(basePath, protobufGeneratedDTSFilePath)}`
+            ts.factory.createStringLiteral(
+                `./${posix.basename(relativePbjsPath, ".js")}`
             )
         ),
-        ts.createImportDeclaration(
+        ts.factory.createImportDeclaration(
             undefined,
             undefined,
             ts.factory.createImportClause(
@@ -26,18 +30,17 @@ export function createImports(
                 undefined,
                 ts.factory.createNamespaceImport(ts.factory.createIdentifier("paralon"))
             ),
-            ts.createStringLiteral(`@paralon/core`)
+            ts.factory.createStringLiteral(`@paralon/core`)
         ),
     ];
 }
 
 export function assembleFile(
-    dtsPath: string,
+    pbjsPath: string,
     outDir: string,
     parts: ts.Node[]
 ): ts.Node[] {
-    const basePath = relative(outDir, dirname(dtsPath));
-    const importDecls = createImports(basePath, basename(dtsPath, ".d.ts"));
+    const importDecls = createImports(outDir, pbjsPath);
 
     return [
         ...importDecls,
@@ -64,4 +67,27 @@ export function printNodes(nodes: ts.Node[]) {
         ts.createNodeArray(nodes),
         outFile
     );
+}
+
+export function emitFiles(outDir: string, tsPath: string) {
+    const options: ts.CompilerOptions = {
+        declaration: true,
+        outDir: outDir,
+        module: ts.ModuleKind.CommonJS,
+        moduleResolution: ts.ModuleResolutionKind.NodeJs,
+        target: ts.ScriptTarget.ES2018,
+        disableSolutionSearching: true,
+        allowJs: false,
+        experimentalDecorators: false,
+        isolatedModules: true,
+        alwaysStrict: true,
+        strict: true,
+        newLine: ts.NewLineKind.LineFeed
+    };
+
+    const program = ts.createProgram([tsPath], options);
+    const result = program.emit();
+    result.diagnostics.forEach(x => {
+        console.error("CompilationError:", `${x.file?.fileName}:x.start`, x.messageText);
+    });
 }

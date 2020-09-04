@@ -4,28 +4,28 @@ import { createServiceIdentifier, createMethodRequestParamTSDeclaration, createM
 import { toCamelCase } from "./util";
 
 function createConstructorTSDeclaration() {
-    return ts.createConstructor(
+    return ts.factory.createConstructorDeclaration(
         undefined,
         undefined,
-        [ts.createParameter(
+        [ts.factory.createParameterDeclaration(
             undefined,
             [
-                ts.createModifier(ts.SyntaxKind.PrivateKeyword),
-                ts.createModifier(ts.SyntaxKind.ReadonlyKeyword)
+                ts.factory.createModifier(ts.SyntaxKind.PrivateKeyword),
+                ts.factory.createModifier(ts.SyntaxKind.ReadonlyKeyword)
             ],
             undefined,
-            ts.createIdentifier("transport"),
+            ts.factory.createIdentifier("transport"),
             undefined,
-            ts.createTypeReferenceNode(
-                ts.createQualifiedName(
-                    ts.createIdentifier("paralon"),
-                    ts.createIdentifier("IClientTransport")
+            ts.factory.createTypeReferenceNode(
+                ts.factory.createQualifiedName(
+                    ts.factory.createIdentifier("paralon"),
+                    ts.factory.createIdentifier("IClientTransport")
                 ),
                 undefined
             ),
             undefined
         )],
-        ts.createBlock(
+        ts.factory.createBlock(
             [],
             false
         )
@@ -49,33 +49,33 @@ export function selectTransportCall (method: Method) {
 };
 
 function createClientMethodTSDeclaration (method: Method) {
-    return ts.createMethod(
+    return ts.factory.createMethodDeclaration(
         undefined,
         undefined,
         undefined,
-        ts.createIdentifier(toCamelCase(method.name)),
+        ts.factory.createIdentifier(toCamelCase(method.name)),
         undefined,
         undefined,
         [
             createMethodRequestParamTSDeclaration(method)
         ],
         createMethodResponseParamTSDeclaration(method),
-        ts.createBlock(
-            [ts.createReturn(ts.createCall(
-                ts.createPropertyAccess(
-                    ts.createPropertyAccess(
-                        ts.createThis(),
-                        ts.createIdentifier("transport")
+        ts.factory.createBlock(
+            [ts.factory.createReturnStatement(ts.factory.createCallExpression(
+                ts.factory.createPropertyAccessExpression(
+                    ts.factory.createPropertyAccessExpression(
+                        ts.factory.createThis(),
+                        ts.factory.createIdentifier("transport")
                     ),
-                    ts.createIdentifier(selectTransportCall(method))
+                    ts.factory.createIdentifier(selectTransportCall(method))
                 ),
                 undefined,
                 [
-                    ts.createElementAccess(
-                        ts.createIdentifier("methodsMap"),
-                        ts.createStringLiteral(toCamelCase(method.name))
+                    ts.factory.createElementAccessExpression(
+                        ts.factory.createIdentifier("methodsMap"),
+                        ts.factory.createStringLiteral(toCamelCase(method.name))
                     ),
-                    ts.createIdentifier("request")
+                    ts.factory.createIdentifier("request")
                 ]
             ))],
             true
@@ -85,24 +85,24 @@ function createClientMethodTSDeclaration (method: Method) {
 
 
 export function createClientTSDeclaration(service: Service) {
-    return ts.createClassDeclaration(
+    return ts.factory.createClassDeclaration(
         undefined,
-        [ts.createModifier(ts.SyntaxKind.ExportKeyword)],
-        ts.createIdentifier("Client"),
+        [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
+        ts.factory.createIdentifier("Client"),
         undefined,
-        [ts.createHeritageClause(
+        [ts.factory.createHeritageClause(
             ts.SyntaxKind.ImplementsKeyword,
             [
-                ts.createExpressionWithTypeArguments(
-                    undefined,
-                    ts.createPropertyAccess(
+                ts.factory.createExpressionWithTypeArguments(
+                    ts.factory.createPropertyAccessExpression(
                         ts.createIdentifier("paralon"),
                         ts.createIdentifier("IClient")
-                    )
+                    ),
+                    undefined
                 ),
-                ts.createExpressionWithTypeArguments(
-                    undefined,
+                ts.factory.createExpressionWithTypeArguments(
                     createServiceIdentifier(service.name),
+                    undefined
                 )
             ]
         )],

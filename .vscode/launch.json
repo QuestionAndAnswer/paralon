@@ -9,7 +9,7 @@
             "request": "launch",
             "name": "tests/generator",
             "program": "${workspaceFolder}/packages/generator/node_modules/mocha/bin/_mocha",
-            "cwd": "${workspaceFolder}",
+            "cwd": "${workspaceFolder}/packages/generator",
             "args": [
                 "--require", "ts-node/register",
                 "--timeout", "999999",
@@ -18,6 +18,24 @@
                 "${workspaceFolder}/packages/generator/__tests__/**/*.test.ts"
             ],
             "internalConsoleOptions": "openOnSessionStart"
-		}
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "generator/cli",
+            "runtimeArgs": [
+                "-r",
+                "ts-node/register"
+            ],
+            "internalConsoleOptions": "openOnSessionStart",
+            "cwd": "${workspaceFolder}/packages/generator",
+            "args": [
+                "src/cli.ts",
+                "--proto", "__tests__/data/contract.proto",
+                "--pout", "__tests__/data/gen/contract.js",
+                "--client", "__tests__/data/gen/test.client",
+                "-k"
+            ]
+        },
     ]
 }

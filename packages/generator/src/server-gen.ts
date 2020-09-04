@@ -4,45 +4,45 @@ import { createServiceIdentifier } from "./service-get";
 import { toCamelCase } from "./util";
 
 export function createServerConstructorTSDeclaration (service: Service) {
-    return ts.createConstructor(
+    return ts.factory.createConstructorDeclaration(
         undefined,
         undefined,
         [
-            ts.createParameter(
+            ts.factory.createParameterDeclaration(
                 undefined,
                 [
-                    ts.createModifier(ts.SyntaxKind.PrivateKeyword),
-                    ts.createModifier(ts.SyntaxKind.ReadonlyKeyword)
+                    ts.factory.createModifier(ts.SyntaxKind.PrivateKeyword),
+                    ts.factory.createModifier(ts.SyntaxKind.ReadonlyKeyword)
                 ],
                 undefined,
-                ts.createIdentifier("serverImpl"),
+                ts.factory.createIdentifier("serverImpl"),
                 undefined,
-                ts.createTypeReferenceNode(
+                ts.factory.createTypeReferenceNode(
                     createServiceIdentifier(service.name),
                     undefined
                 ),
                 undefined
             ),
-            ts.createParameter(
+            ts.factory.createParameterDeclaration(
                 undefined,
                 [
-                    ts.createModifier(ts.SyntaxKind.PrivateKeyword),
-                    ts.createModifier(ts.SyntaxKind.ReadonlyKeyword)
+                    ts.factory.createModifier(ts.SyntaxKind.PrivateKeyword),
+                    ts.factory.createModifier(ts.SyntaxKind.ReadonlyKeyword)
                 ],
                 undefined,
-                ts.createIdentifier("transport"),
+                ts.factory.createIdentifier("transport"),
                 undefined,
-                ts.createTypeReferenceNode(
-                    ts.createQualifiedName(
-                        ts.createIdentifier("paralon"),
-                        ts.createIdentifier("IServerTransport")
+                ts.factory.createTypeReferenceNode(
+                    ts.factory.createQualifiedName(
+                        ts.factory.createIdentifier("paralon"),
+                        ts.factory.createIdentifier("IServerTransport")
                     ),
                     undefined
                 ),
                 undefined
             )
         ],
-        ts.createBlock(
+        ts.factory.createBlock(
             [],
             false
         )
@@ -66,49 +66,49 @@ export function selectTransportCall (method: Method) {
 };
 
 export function createMethodRegistryCallTSDeclaration (method: Method) {
-    return ts.createExpressionStatement(ts.createCall(
-        ts.createPropertyAccess(
-            ts.createPropertyAccess(
-                ts.createThis(),
-                ts.createIdentifier("transport")
+    return ts.factory.createExpressionStatement(ts.factory.createCallExpression(
+        ts.factory.createPropertyAccessExpression(
+            ts.factory.createPropertyAccessExpression(
+                ts.factory.createThis(),
+                ts.factory.createIdentifier("transport")
             ),
-            ts.createIdentifier(selectTransportCall(method))
+            ts.factory.createIdentifier(selectTransportCall(method))
         ),
         undefined,
         [
-            ts.createElementAccess(
-                ts.createIdentifier("methodsMap"),
-                ts.createStringLiteral(toCamelCase(method.name))
+            ts.factory.createElementAccessExpression(
+                ts.factory.createIdentifier("methodsMap"),
+                ts.factory.createStringLiteral(toCamelCase(method.name))
             ),
-            ts.createCall(
-                ts.createPropertyAccess(
-                    ts.createElementAccess(
-                        ts.createPropertyAccess(
-                            ts.createThis(),
-                            ts.createIdentifier("serverImpl")
+            ts.factory.createCallExpression(
+                ts.factory.createPropertyAccessExpression(
+                    ts.factory.createElementAccessExpression(
+                        ts.factory.createPropertyAccessExpression(
+                            ts.factory.createThis(),
+                            ts.factory.createIdentifier("serverImpl")
                         ),
-                        ts.createStringLiteral(toCamelCase(method.name))
+                        ts.factory.createStringLiteral(toCamelCase(method.name))
                     ),
-                    ts.createIdentifier("bind")
+                    ts.factory.createIdentifier("bind")
                 ),
                 undefined,
-                [ts.createThis()]
+                [ts.factory.createThis()]
             )
         ]
     ))
 }
 
 export function createRegisterMethodTSDeclaration (service: Service) {
-    return ts.createMethod(
+    return ts.factory.createMethodDeclaration(
         undefined,
-        [ts.createModifier(ts.SyntaxKind.PublicKeyword)],
+        [ts.factory.createModifier(ts.SyntaxKind.PublicKeyword)],
         undefined,
-        ts.createIdentifier("register"),
+        ts.factory.createIdentifier("register"),
         undefined,
         undefined,
         [],
         undefined,
-        ts.createBlock(
+        ts.factory.createBlock(
             service.methodsArray.map(createMethodRegistryCallTSDeclaration),
             true
         )
@@ -116,19 +116,19 @@ export function createRegisterMethodTSDeclaration (service: Service) {
 }
 
 export function createServerTSDeclaration(service: Service) {
-    return ts.createClassDeclaration(
+    return ts.factory.createClassDeclaration(
         undefined,
-        [ts.createModifier(ts.SyntaxKind.ExportKeyword)],
-        ts.createIdentifier("ServerBridge"),
+        [ts.factory.createModifier(ts.SyntaxKind.ExportKeyword)],
+        ts.factory.createIdentifier("ServerBridge"),
         undefined,
-        [ts.createHeritageClause(
+        [ts.factory.createHeritageClause(
             ts.SyntaxKind.ImplementsKeyword,
-            [ts.createExpressionWithTypeArguments(
-                undefined,
-                ts.createPropertyAccess(
-                    ts.createIdentifier("paralon"),
-                    ts.createIdentifier("IServerBridge")
-                )
+            [ts.factory.createExpressionWithTypeArguments(
+                ts.factory.createPropertyAccessExpression(
+                    ts.factory.createIdentifier("paralon"),
+                    ts.factory.createIdentifier("IServerBridge")
+                ),
+                undefined
             )]
         )],
         [

@@ -4,24 +4,24 @@ import { toCamelCase } from "./util";
 import { resolveTypeIdentifier } from "./map-gen";
 
 function wrapIntoMessageReadStream(node: ts.TypeReferenceNode) {
-    return ts.createTypeReferenceNode(
-        ts.createQualifiedName(
-            ts.createIdentifier("paralon"),
-            ts.createIdentifier("MessageReadStream")
+    return ts.factory.createTypeReferenceNode(
+        ts.factory.createQualifiedName(
+            ts.factory.createIdentifier("paralon"),
+            ts.factory.createIdentifier("MessageReadStream")
         ),
         [node]
     );
 }
 
 function wrapIntoPromise(node: ts.TypeReferenceNode) {
-    return ts.createTypeReferenceNode(
-        ts.createIdentifier("Promise"),
+    return ts.factory.createTypeReferenceNode(
+        ts.factory.createIdentifier("Promise"),
         [node]
     );
 }
 
 export function createMethodRequestParamTSDeclaration (method: Method) {
-    let requestType = ts.createTypeReferenceNode(
+    let requestType = ts.factory.createTypeReferenceNode(
         ts.factory.createIdentifier(resolveTypeIdentifier(method, method.requestType)),
         undefined
     );
@@ -30,11 +30,11 @@ export function createMethodRequestParamTSDeclaration (method: Method) {
         requestType = wrapIntoMessageReadStream(requestType);
     }
 
-    return ts.createParameter(
+    return ts.factory.createParameterDeclaration(
         undefined,
         undefined,
         undefined,
-        ts.createIdentifier("request"),
+        ts.factory.createIdentifier("request"),
         undefined,
         requestType,
         undefined
@@ -42,7 +42,7 @@ export function createMethodRequestParamTSDeclaration (method: Method) {
 }
 
 export function createMethodResponseParamTSDeclaration (method: Method) {
-    let responseType = ts.createTypeReferenceNode(
+    let responseType = ts.factory.createTypeReferenceNode(
         ts.factory.createIdentifier(resolveTypeIdentifier(method, method.responseType)),
         undefined
     );
@@ -57,14 +57,15 @@ export function createMethodResponseParamTSDeclaration (method: Method) {
 }
 
 function createServiceMethodTSDeclaration(method: Method) {
-    return ts.createMethodSignature(
+    return ts.factory.createMethodSignature(
+        undefined,
+        ts.factory.createIdentifier(toCamelCase(method.name)),
+        undefined,
         undefined,
         [
             createMethodRequestParamTSDeclaration(method)
         ],
-        createMethodResponseParamTSDeclaration(method),
-        ts.createIdentifier(toCamelCase(method.name)),
-        undefined
+        createMethodResponseParamTSDeclaration(method)
     );
 
 }
