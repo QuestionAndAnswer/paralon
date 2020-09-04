@@ -16,5 +16,5 @@ export interface IClientTransport {
     callImpl <RQ, RS>(method: MethodMeta<RQ, RS>, data: RQ): Promise<RS>;
     clientStreamImpl <RQ, RS>(method: MethodMeta<RQ, RS>, stream: MessageReadStream<RQ>): Promise<RS>;
     serverStreamImpl <RQ, RS>(method: MethodMeta<RQ, RS>, data: RQ): MessageReadStream<RS>;
-    biStreamImpl <RQ, RS>(method: MethodMeta, stream: MessageReadStream<RQ>): MessageReadStream<RS>;
+    biStreamImpl <RQ, RS>(method: MethodMeta<RQ, RS>, stream: MessageReadStream<RQ>): MessageReadStream<RS>;
 }
