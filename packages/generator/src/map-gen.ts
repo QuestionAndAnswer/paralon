@@ -20,7 +20,7 @@ export function createMethodsMapTSDeclaration(service: Service) {
                     ts.factory.createTypeReferenceNode(
                         ts.factory.createQualifiedName(
                             ts.factory.createIdentifier("paralon"),
-                            ts.factory.createIdentifier("MethodMap")
+                            ts.factory.createIdentifier("MethodsMap")
                         ),
                         undefined
                     ),

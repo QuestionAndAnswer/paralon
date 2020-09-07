@@ -31,11 +31,18 @@ export interface MessageReadStream<T = unknown> extends NodeJS.ReadableStream {
     removeListener(event: "message", listener: (chunk: T) => void): this;
 }
 
-export type CallMethod<RQ = unknown, RS = unknown> = (request: MethodMessage<RQ>) => Promise<RS>;
+export type CallMethod<RQ = unknown, RS = unknown> = (request: RQ) => Promise<RS>;
 export type ClientStreamMethod<RQ = unknown, RS = unknown> = (request: MessageReadStream<RQ>) => Promise<RS>;
 export type ServerStreamMethod<RQ = unknown, RS = unknown> = (request: RQ) => MessageReadStream<RS>;
 export type BiStreamMethod<RQ = unknown, RS = unknown> = (request: MessageReadStream<RQ>) => MessageReadStream<RS>;
 
-export interface IProtoService {
-    [method: string]: CallMethod | ClientStreamMethod | ServerStreamMethod | BiStreamMethod;
-}
+export type IProtoMethod<RQ = unknown, RS = unknown> = 
+    CallMethod<RQ, RS> | 
+    ClientStreamMethod<RQ, RS> | 
+    ServerStreamMethod<RQ, RS> | 
+    BiStreamMethod<RQ, RS>;
+
+//NOTE: They should be just a IProtoService, but becuase of the TS limitations
+//it is not possible at the moment to declare them in a single interface
+export type IProtoServiceMethods = { [method: string]: IProtoMethod; }
+export interface IProtoService {};

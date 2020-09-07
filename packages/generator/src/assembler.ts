@@ -30,7 +30,7 @@ export function createImports(
                 undefined,
                 ts.factory.createNamespaceImport(ts.factory.createIdentifier("paralon"))
             ),
-            ts.factory.createStringLiteral(`@paralon/core`)
+            ts.factory.createStringLiteral(`@prln/core`)
         ),
     ];
 }

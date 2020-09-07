@@ -1,6 +1,6 @@
 import * as contract from "./contract";
-import * as paralon from "@paralon/core";
-export const methodsMap: paralon.MethodMap = {
+import * as paralon from "@prln/core";
+export const methodsMap: paralon.MethodsMap = {
     "get": { name: "get", reqType: contract.ns1.testPkg.GetRequest, resType: contract.ns1.testPkg.GetResponse },
     "clientStreamGet": { name: "clientStreamGet", reqType: contract.ns1.testPkg.GetRequest, resType: contract.ns1.testPkg.GetResponse },
     "serverStreamGet": { name: "serverStreamGet", reqType: contract.ns1.testPkg.GetRequest, resType: contract.ns1.testPkg.GetResponse },
