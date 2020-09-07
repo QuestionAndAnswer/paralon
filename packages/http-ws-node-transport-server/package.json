@@ -1,5 +1,5 @@
 {
-  "name": "@paralon/web-transport-server",
+  "name": "@paralon/http-ws-node-transport-server",
   "version": "1.0.0",
   "description": "> TODO: description",
   "keywords": [
