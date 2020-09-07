@@ -1,4 +1,4 @@
-import { IClientTransport, MethodMeta, MessageReadStream } from "@paralon/core";
+import { IClientTransport, MethodMeta, MessageReadStream } from "@prln/core";
 import { IFetchTransport, jsonFetch } from "./factories";
 
 export class WebClientTransport implements IClientTransport {

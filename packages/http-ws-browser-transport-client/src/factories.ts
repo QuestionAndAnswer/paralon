@@ -13,6 +13,7 @@ export function jsonFetch (
                 ...init, 
                 method: "POST",
                 headers: {
+                    ...init?.headers,
                     'Content-Type': 'application/json'
                 }
             }
@@ -20,4 +21,19 @@ export function jsonFetch (
     };
 
     return Object.assign(wrappedFn, jsonCallSerializer);
+}
+
+export function useUrlPrefix (prefix: string, fetchFn: typeof fetch): typeof fetch {
+    prefix = prefix[prefix.length - 1] === "/" ? prefix.slice(0, -1) : prefix;
+    return (input, init) => {
+        if (input instanceof Request) {
+            input = new Request({
+                ...input,
+                url: `${prefix}/${input.url}`               
+            }, init);
+        } else {
+            input = `${prefix}/${input}`;
+        }
+        return fetchFn(input, init);
+    }
 }

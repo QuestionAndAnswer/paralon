@@ -37,5 +37,20 @@
                 "-k"
             ]
         },
+        {
+			"type": "node",
+            "request": "launch",
+            "name": "tests/http-ws-browser-transport-client",
+            "program": "${workspaceFolder}/packages/http-ws-browser-transport-client/node_modules/mocha/bin/_mocha",
+            "cwd": "${workspaceFolder}/packages/http-ws-browser-transport-client",
+            "args": [
+                "--require", "ts-node/register",
+                "--timeout", "999999",
+                "--colors", 
+                "--recursive",
+                "${workspaceFolder}/packages/http-ws-browser-transport-client/__tests__/**/*.test.ts"
+            ],
+            "internalConsoleOptions": "openOnSessionStart"
+        },
     ]
 }

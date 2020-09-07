@@ -1,4 +1,4 @@
-import { MethodMessage } from "@paralon/core";
+import { MethodMessage } from "@prln/core";
 
 export interface ICallSerializerImpl {
     encode: <T>(type: MethodMessage<T>, data: T) => any;
