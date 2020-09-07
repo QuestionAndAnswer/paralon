@@ -1,8 +1,9 @@
 {
-  "name": "@paralon/generator",
+  "name": "@prln/generator",
   "version": "1.0.0",
   "description": "Generation tools for paralon framework",
   "keywords": [
+    "prln",
     "paralon"
   ],
   "author": "Artsiom Miksiuk <forbiddentool@gmail.com>",

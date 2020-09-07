@@ -1,8 +1,9 @@
 {
-  "name": "@paralon/http-ws-node-transport-server",
+  "name": "@prln/http-ws-node-transport-server",
   "version": "1.0.0",
   "description": "> TODO: description",
   "keywords": [
+    "prln",
     "paralon"
   ],
   "author": "Artsiom Miksiuk <forbiddentool@gmail.com>",

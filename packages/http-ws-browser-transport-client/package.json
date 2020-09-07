@@ -1,8 +1,9 @@
 {
-  "name": "@paralon/http-ws-browser-transport-client",
+  "name": "@prln/http-ws-browser-transport-client",
   "version": "1.0.0",
   "description": "> TODO: description",
   "keywords": [
+    "prln",
     "paralon"
   ],
   "author": "Artsiom Miksiuk <forbiddentool@gmail.com>",

@@ -1,9 +1,10 @@
 {
-  "name": "@paralon/core",
+  "name": "@prln/core",
   "version": "1.0.0",
   "description": "Paralon framework core",
   "keywords": [
     "paralon",
+    "prln",
     "core",
     "proto",
     "microservices",
