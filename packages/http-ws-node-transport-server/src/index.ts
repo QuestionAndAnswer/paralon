@@ -1,4 +1,4 @@
-import { IServerTransport, MethodMeta, CallCb, ClientStreamCb, ServerStreamCb, BiStreamCb } from "@paralon/core";
+import { IServerTransport, MethodMeta, CallCb, ClientStreamCb, ServerStreamCb, BiStreamCb } from "@prln/core";
 import { Router } from "express";
 import bodyParser from "body-parser";
 
