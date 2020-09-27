@@ -16,8 +16,8 @@ export class WebClientTransport implements IClientTransport {
             .then(async x => {
                 if (x.status === 200) {
                     try {
-                        const body = await x.body?.getReader().read();
-                        return this.fetchFn.decode(method.resType, body?.value)
+                        const res = await this.fetchFn.decode(method.resType, x);
+                        return res;
                     } catch (err) {
                         throw err;
                     }

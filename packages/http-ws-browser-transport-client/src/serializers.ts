@@ -2,14 +2,15 @@ import { MethodMessage } from "@prln/core";
 
 export interface ICallSerializerImpl {
     encode: <T>(type: MethodMessage<T>, data: T) => any;
-    decode: <T>(type: MethodMessage<T>, data: Uint8Array | undefined) => T;
+    decode: <T>(type: MethodMessage<T>, res: Response) => Promise<T>;
 }
 
 export const jsonCallSerializer: ICallSerializerImpl = {
     encode: (type, data) => {
-        return type.toObject(data);
+        return JSON.stringify(type.toObject(data))
     },
-    decode: (type, data) => {
-        return type.fromObject(data ? JSON.parse(data.toString()) : {});
+    decode: async (type, res) => {
+        const body = await res.json();
+        return type.fromObject(body);
     }
 }

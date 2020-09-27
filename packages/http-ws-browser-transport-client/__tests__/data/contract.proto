@@ -1,0 +1,14 @@
+syntax = "proto3";
+package prlnClientTest;
+
+service TestService {
+    rpc Get (GetRequest) returns (GetResponse) {}
+}
+
+message GetRequest {
+    required uint64 i = 1;
+}
+
+message GetResponse {
+    required uint64 iplus1 = 1;
+}

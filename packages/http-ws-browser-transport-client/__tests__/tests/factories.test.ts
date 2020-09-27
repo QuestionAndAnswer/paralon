@@ -1,13 +1,12 @@
+/// <reference types="mocha" />
 import chai, { assert, expect } from "chai";
 import chaiSpies from "chai-spies";
-import { jsonFetch, useUrlPrefix } from "../src/factories";
+import { jsonFetch, useUrlPrefix } from "../../src/factories";
 
 chai.use(chaiSpies);
 
 describe("factories", function () {
-    //to keep things simpler, and not bring new Response() browser API into node
-    //@ts-ignore
-    const fetchFnMock: typeof fetch = (_input, _init) => Promise.resolve({});
+    const fetchFnMock: typeof fetch = (_input, _init) => Promise.resolve(new Response());
     
     describe("jsonFetch", function () {
         it("passed fetch function immutable", function () {

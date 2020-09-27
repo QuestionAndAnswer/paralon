@@ -7,11 +7,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
  */
 module.exports = {
     mode: "development",
-    entry: "index.test.ts",
+    entry: "./__tests__/tests/index.test.ts",
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: 'test.bundle.js',
     },
+    devtool: "inline-source-map",
     module: {
         rules: [
             {
