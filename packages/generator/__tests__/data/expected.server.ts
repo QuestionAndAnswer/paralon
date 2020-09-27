@@ -23,13 +23,13 @@ export interface ITestService extends paralon.IProtoService {
 export class ServerBridge implements paralon.IServerBridge {
     constructor(private readonly serverImpl: ITestService, private readonly transport: paralon.IServerTransport) { }
     public register() {
-        this.transport.registerCallImpl(methodsMap["get"], this.serverImpl["get"].bind(this));
-        this.transport.registerClientStreamImpl(methodsMap["clientStreamGet"], this.serverImpl["clientStreamGet"].bind(this));
-        this.transport.registerServerStreamImpl(methodsMap["serverStreamGet"], this.serverImpl["serverStreamGet"].bind(this));
-        this.transport.registerBiStreamImpl(methodsMap["biStreamGet"], this.serverImpl["biStreamGet"].bind(this));
-        this.transport.registerCallImpl(methodsMap["getEmpty"], this.serverImpl["getEmpty"].bind(this));
-        this.transport.registerClientStreamImpl(methodsMap["clientStreamGetEmpty"], this.serverImpl["clientStreamGetEmpty"].bind(this));
-        this.transport.registerServerStreamImpl(methodsMap["serverStreamGetEmpty"], this.serverImpl["serverStreamGetEmpty"].bind(this));
-        this.transport.registerBiStreamImpl(methodsMap["biStreamGetEmpty"], this.serverImpl["biStreamGetEmpty"].bind(this));
+        this.transport.registerCallImpl(methodsMap["get"], this.serverImpl["get"].bind(this.serverImpl));
+        this.transport.registerClientStreamImpl(methodsMap["clientStreamGet"], this.serverImpl["clientStreamGet"].bind(this.serverImpl));
+        this.transport.registerServerStreamImpl(methodsMap["serverStreamGet"], this.serverImpl["serverStreamGet"].bind(this.serverImpl));
+        this.transport.registerBiStreamImpl(methodsMap["biStreamGet"], this.serverImpl["biStreamGet"].bind(this.serverImpl));
+        this.transport.registerCallImpl(methodsMap["getEmpty"], this.serverImpl["getEmpty"].bind(this.serverImpl));
+        this.transport.registerClientStreamImpl(methodsMap["clientStreamGetEmpty"], this.serverImpl["clientStreamGetEmpty"].bind(this.serverImpl));
+        this.transport.registerServerStreamImpl(methodsMap["serverStreamGetEmpty"], this.serverImpl["serverStreamGetEmpty"].bind(this.serverImpl));
+        this.transport.registerBiStreamImpl(methodsMap["biStreamGetEmpty"], this.serverImpl["biStreamGetEmpty"].bind(this.serverImpl));
     }
 }

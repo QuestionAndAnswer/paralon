@@ -92,7 +92,12 @@ export function createMethodRegistryCallTSDeclaration (method: Method) {
                     ts.factory.createIdentifier("bind")
                 ),
                 undefined,
-                [ts.factory.createThis()]
+                [
+                    ts.factory.createPropertyAccessExpression(
+                        ts.factory.createThis(),
+                        ts.factory.createIdentifier("serverImpl")
+                    )
+                ]
             )
         ]
     ))
