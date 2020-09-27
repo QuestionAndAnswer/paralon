@@ -12,10 +12,22 @@ export class WebServerTransport implements IServerTransport {
             `/${method.name}`,
             bodyParser.json(),
             (req, res) => {
-                callCb(method.reqType.fromObject(req.body))
+                let inMessage: RQ;
+                try {
+                    inMessage = method.reqType.fromObject(req.body)
+                } catch (err) {
+                    res.status(400);
+                    res.json({
+                        message: `Unable to parse incoming message`
+                    });
+                    return;
+                }
+
+                callCb(inMessage)
                     .then(data => {
+                        const outMessage = method.resType.toObject(data);
                         res.status(200);
-                        res.json(method.resType.toObject(data));
+                        res.json(outMessage);
                     })
                     .catch(err => {
                         res.status(500);
